@@ -1,9 +1,10 @@
 import React from 'react'
 
 interface WordProps {
+  objective: string
   word: string
   guess: (letter: string)=> void
-  length: number
+  status: 'playing' | 'won' | 'lost'
 }
 const Word: React.FunctionComponent<WordProps> = (props: WordProps)=> {
   return (
@@ -11,14 +12,13 @@ const Word: React.FunctionComponent<WordProps> = (props: WordProps)=> {
       {Object.values(props.word.split("")).map((letter, index) => 
         <span 
           key={`letter_${index}`}
-          className='character'
+          className={`character ${letter === ' ' ? 'space' : ''}`}
          >
           {letter}
         </span>
       )}
-      {props.word.length < props.length 
-      ? <>
-        <input 
+      {props.status === 'playing'
+      ? <input 
           type="text"
           className='character'
           value=""
@@ -26,14 +26,14 @@ const Word: React.FunctionComponent<WordProps> = (props: WordProps)=> {
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>  props.guess(event.target.value) }
           autoFocus
         />
-        {Array.from({length: props.length - props.word.length - 1 }, (_, k) => 
-          <span 
-            key={`blank_${k}`}
-            className='character'
-          />
-        )}
-      </>
-      : undefined}
+      : undefined }
+      { props.word.length < props.objective.length ? 
+      Array.from({length: props.objective.length - props.word.length - (props.status === 'playing' ? 1 : 0)}, (_, index) => 
+        <span 
+          key={`blank_${index}`}
+          className={`character ${props.objective[index + props.word.length + 1 ] === ' ' ? 'space' : ''}`}
+        />
+      ) :undefined  }
     </div>
   )
 }

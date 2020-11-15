@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
 }
 
 code {
@@ -62,3 +63,14 @@ code {
   vertical-align: middle;
 }
 
+#word .character.space {
+  border-bottom: none;
+}
+
+#lives {
+  font-size:2rem;
+}
+
+.error {
+  color:red;
+}

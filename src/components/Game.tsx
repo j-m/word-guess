@@ -4,7 +4,8 @@ import StartForm from './Start/StartForm'
 
 interface GameProps {}
 interface GameState {
-  word: string
+  seed: number | undefined
+  word: string | undefined
   playing: boolean
   guesses: string[]
 }
@@ -12,13 +13,14 @@ export default class Game extends React.PureComponent<GameProps, GameState> {
   constructor (props: GameProps) {
     super(props)
     this.state = {
-      word: "",
+      seed: undefined,
+      word: undefined,
       playing: false,
       guesses: [],
     }
   }
 
-  start = (word:string) => this.setState({playing: true, word: word.toUpperCase()})
+  start = (seed: number, word:string) => this.setState({playing: true, seed, word})
   reset = () => this.setState({word: "", playing: false, guesses: []})
 
   render() {
@@ -27,7 +29,8 @@ export default class Game extends React.PureComponent<GameProps, GameState> {
       {
         this.state.playing
         ? <Playing 
-            objective={this.state.word} 
+            seed={this.state.seed!}
+            objective={this.state.word!} 
             reset={this.reset}
           />
         : <StartForm start={this.start}/>
