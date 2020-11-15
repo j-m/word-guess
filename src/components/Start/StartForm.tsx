@@ -8,7 +8,7 @@ function seed(word: string) {
   let seed = 0
   Object.values(word.split("")).forEach(letter => {
     if (letter === " ") {
-      seed += BASE
+      seed += 0
     } else {
       seed += letter.charCodeAt(0) - 65 + 1
     }
@@ -23,8 +23,7 @@ function word(seed: number) {
     seed /= BASE
     seed = Math.floor(seed)
     const letter: number = seed % BASE
-    console.log(letter)
-    if (letter === BASE) {
+    if (letter === 0) {
       word += ' '
     } else {
       word += String.fromCharCode(letter + 65 - 1)
