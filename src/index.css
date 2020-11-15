@@ -45,13 +45,25 @@ code {
   text-align: center;
 }
 
-#word {
+#sentence {
   display: flex;
-  align-items: center;
-  text-align: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%;
 }
 
-#word .character {
+#sentence .word {
+  flex: 0;
+  white-space: nowrap;
+  margin: 0 4rem;
+}
+
+#sentence .space {
+  flex: 1;
+}
+
+#sentence .word .character {
   text-align: center;
   display: inline-block;
   width: 6rem;
@@ -63,7 +75,7 @@ code {
   vertical-align: middle;
 }
 
-#word .character.space {
+#sentence .word .character.space {
   border-bottom: none;
 }
 
