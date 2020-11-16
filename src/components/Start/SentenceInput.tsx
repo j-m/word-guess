@@ -1,19 +1,19 @@
 import React from 'react'
 
-interface WordInputProps {
-  word: string
-  onChange: (word: string)=> void
+interface SentenceInputProps {
+  value: string
+  onChange: (input: string) => void
 }
-const WordInput: React.FunctionComponent<WordInputProps> = (props: WordInputProps)=> {
+const SentenceInput: React.FunctionComponent<SentenceInputProps> = (props: SentenceInputProps)=> {
   return (
     <input 
       type="text"
       style={{fontSize:'3rem', fontWeight:400}}
-      value={props.word}
+      value={props.value}
       onChange={(event: React.ChangeEvent<HTMLInputElement>) =>  props.onChange(event.target.value) }
       autoFocus
     />
   )
 }
 
-export default WordInput
+export default SentenceInput

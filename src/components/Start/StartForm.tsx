@@ -1,12 +1,15 @@
+import { version } from '../../../package.json'
 import React from 'react'
-import WordInput from './WordInput'
+import { FaGithub } from 'react-icons/fa'
+
+import SentenceInput from './SentenceInput'
 import StartGameButton from './StartGameButton'
 
 const BASE: bigint = 28n
 
-function seed(word: string): bigint {
+function seed(input: string): bigint {
   let seed: bigint = 0n
-  Object.values(word.split("")).forEach(letter => {
+  Object.values(input.split("")).forEach(letter => {
     if (letter !== " ") {
       seed += BigInt(letter.charCodeAt(0)) - 65n + 1n
     }
@@ -15,38 +18,40 @@ function seed(word: string): bigint {
   return seed
 }
 
-function word(seed: bigint): string {
-  let word: string = ""
+function sentence(seed: bigint): string {
+  let sentence: string = ""
   while (seed > BASE) {
     seed /= BASE
     const letter: number = Number(seed % BASE)
     if (letter === 0) {
-      word += ' '
+      sentence += ' '
     } else {
-      word += String.fromCharCode(letter + 65 - 1)
+      sentence += String.fromCharCode(letter + 65 - 1)
     }
   }
-  return word.split("").reverse().join("")
+  return sentence.split("").reverse().join("")
 }
 
 interface StartFormProps {
-  start: (seed: bigint, word: string) => void
+  start: (seed: bigint, input: string) => void
 }
 interface StartFormState {
-  word: string
+  input: string
+  seed: bigint | undefined
   error: string | undefined
 }
 export default class StartForm extends React.PureComponent<StartFormProps, StartFormState> {
   constructor (props: StartFormProps) {
     super(props)
     this.state = {
-      word: "",
+      input: "",
+      seed: undefined,
       error: undefined,
     }
   }
 
   submit = () => {
-    const input: string = this.state.word.toUpperCase()
+    const input: string = this.state.input.toUpperCase()
     if (!input || !input.trim()) {
       this.setState({error: "Input required"})
       return
@@ -56,20 +61,31 @@ export default class StartForm extends React.PureComponent<StartFormProps, Start
       return
     }
     if (/^\d+$/.test(input)) {
-      this.props.start(BigInt(input), word(BigInt(input)))
+      this.props.start(BigInt(input), sentence(BigInt(input)))
       return
     }
     this.setState({error: "Input should either be just letters and spaces or a numeric seed"})
+  }
 
+  showSeed = () => {
+    this.setState(state => ({...state, seed: seed(state.input)}))
+  }
+
+  onWordChange = (input: string) => {
+    this.setState({seed: undefined, input})
   }
 
   render() {
     return (
-    <>
+    <div>
+      {this.state.seed 
+      ? <span>{this.state.seed.toString()}</span>
+      : <button onClick={this.showSeed}>Show seed</button>}
+
       <form id="start" onSubmit={(e)=>e.preventDefault()}>
-        <WordInput 
-          word={this.state.word} 
-          onChange={(word: string)=>this.setState({word})}
+        <SentenceInput 
+          value={this.state.input} 
+          onChange={this.onWordChange}
         />
         <StartGameButton 
           onClick={this.submit}
@@ -78,7 +94,13 @@ export default class StartForm extends React.PureComponent<StartFormProps, Start
       {this.state.error 
       ? <p className="error">{this.state.error}</p>
       : undefined}
-    </>
+
+      <div style={{width: "100%", textAlign: 'center'}}>
+        <span>v{version}</span>
+        <span style={{margin:"0 1rem"}}>|</span>
+        <a href="https://github.com/j-m/word-guess"><FaGithub style={{ verticalAlign: 'middle'}}/>Behind the scenes</a>
+      </div>
+    </div>
     )
   }
 }
