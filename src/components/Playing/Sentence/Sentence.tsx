@@ -5,7 +5,7 @@ import SentenceWord from './SentenceWord'
 interface SentenceProps {
   objective: string
   progress: string
-  status: 'playing' | 'won' | 'lost'
+  showInput: boolean
   guess: (letter: string) => void
 }
 const Sentence: React.FunctionComponent<SentenceProps> = (props: SentenceProps)=> {
@@ -19,7 +19,7 @@ const Sentence: React.FunctionComponent<SentenceProps> = (props: SentenceProps)=
             props.progress.length -
             words.reduce((accumulator, word, index) => accumulator + (wordIndex > index ? word.length + 1 : 0), 0 as number)  
           } 
-          playing={props.status === 'playing'}
+          showInput={props.showInput}
           guess={props.guess}
         />
       )}

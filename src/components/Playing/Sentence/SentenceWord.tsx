@@ -5,7 +5,7 @@ import SentenceInput from './SentenceInput'
 interface SentenceWordProps {
   word: string
   inputIndex: number
-  playing: boolean
+  showInput: boolean
   guess: (letter: string) => void
 }
 const SentenceWord: React.FunctionComponent<SentenceWordProps> = (props: SentenceWordProps)=> {
@@ -13,7 +13,7 @@ const SentenceWord: React.FunctionComponent<SentenceWordProps> = (props: Sentenc
   return (
     <div className="word">
       {Object.values(letters).map((letter, letterIndex) => 
-        props.playing && letterIndex === props.inputIndex
+        props.showInput && letterIndex === props.inputIndex
         ? <SentenceInput guess={props.guess}/>
         : <span key={letterIndex} className='character'>
             {letterIndex < props.inputIndex 
