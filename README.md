@@ -18,10 +18,10 @@ Then simply run `npm i` and `npm start` and you're off!
 
 ## Roadmap
 
-Random challenge
-Daily Challenge
-Leaderboards
-Compete mode
+- Random challenge  
+- Daily Challenge  
+- Leaderboards  
+- Compete mode  
 
 ## Changelog
 
