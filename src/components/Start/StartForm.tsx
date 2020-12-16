@@ -4,33 +4,7 @@ import { FaGithub } from 'react-icons/fa'
 
 import SentenceInput from './SentenceInput'
 import StartGameButton from './StartGameButton'
-
-const BASE: bigint = 28n
-
-function seed(input: string): bigint {
-  let seed: bigint = 0n
-  Object.values(input.split("")).forEach(letter => {
-    if (letter !== " ") {
-      seed += BigInt(letter.charCodeAt(0)) - 65n + 1n
-    }
-    seed *= BASE
-  })
-  return seed
-}
-
-function sentence(seed: bigint): string {
-  let sentence: string = ""
-  while (seed > BASE) {
-    seed /= BASE
-    const letter: number = Number(seed % BASE)
-    if (letter === 0) {
-      sentence += ' '
-    } else {
-      sentence += String.fromCharCode(letter + 65 - 1)
-    }
-  }
-  return sentence.split("").reverse().join("")
-}
+import { sentenceToSeed, seedToSentence } from '../../util/seed'
 
 interface StartFormProps {
   start: (seed: bigint, input: string) => void
@@ -57,18 +31,18 @@ export default class StartForm extends React.PureComponent<StartFormProps, Start
       return
     } 
     if (/^[A-Za-z\s]+$/.test(input)) {
-      this.props.start(seed(input), input)
+      this.props.start(sentenceToSeed(input), input)
       return
     }
     if (/^\d+$/.test(input)) {
-      this.props.start(BigInt(input), sentence(BigInt(input)))
+      this.props.start(BigInt(input), seedToSentence(BigInt(input)))
       return
     }
     this.setState({error: "Input should either be just letters and spaces or a numeric seed"})
   }
 
   showSeed = () => {
-    this.setState(state => ({...state, seed: seed(state.input)}))
+    this.setState(state => ({...state, seed: sentenceToSeed(state.input.toUpperCase())}))
   }
 
   onWordChange = (input: string) => {
@@ -91,9 +65,7 @@ export default class StartForm extends React.PureComponent<StartFormProps, Start
           onClick={this.submit}
         />
       </form>
-      {this.state.error 
-      ? <p className="error">{this.state.error}</p>
-      : undefined}
+      {this.state.error && <p className="error">{this.state.error}</p>}
 
       <div style={{width: "100%", textAlign: 'center'}}>
         <span>v{version}</span>
