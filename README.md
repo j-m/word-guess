@@ -1,4 +1,4 @@
-# ![word guess banner logo](./assets/banner.png) Word Guess
+# ![word guess banner logo](./docs/assets/banner.png) Word Guess
 
 Hangman without the hanging man  
 
