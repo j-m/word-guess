@@ -12,6 +12,7 @@ export default defineConfig({
   build: {
     outDir: '../build',
     emptyOutDir: true,
+    target: ['es2020'],
   },
   plugins: [react(), eslint({ formatter: 'stylish' })],
 })

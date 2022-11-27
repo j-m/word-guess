@@ -12,7 +12,7 @@
       "dom.iterable",
       "esnext"
     ],
-    "module": "ESNext",
+    "module": "es2020",
     "moduleResolution": "node",
     "noEmit": true,
     "noImplicitAny": true,
@@ -20,7 +20,7 @@
     "skipLibCheck": true,
     "strict": true,
     "strictNullChecks": true,
-    "target": "ESNext",
+    "target": "es2020",
   },
   "references": [
     {
