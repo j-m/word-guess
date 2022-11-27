@@ -1,9 +1,9 @@
-const BASE: bigint = 27n
+const BASE = 27n
 
 export function sentenceToSeed(input: string): bigint {
-  let seed: bigint = 0n
-  Object.values(input.split("")).forEach(letter => {
-    if (letter !== " ") {
+  let seed = 0n
+  Object.values(input.split('')).forEach((letter) => {
+    if (letter !== ' ') {
       seed += BigInt(letter.charCodeAt(0)) - 65n + 1n
     }
     seed *= BASE
@@ -12,7 +12,7 @@ export function sentenceToSeed(input: string): bigint {
 }
 
 export function seedToSentence(seed: bigint): string {
-  let sentence: string = ""
+  let sentence = ''
   while (seed > BASE) {
     seed /= BASE
     const letter: bigint = seed % BASE
@@ -22,5 +22,5 @@ export function seedToSentence(seed: bigint): string {
       sentence += String.fromCharCode(Number(letter + 65n - 1n))
     }
   }
-  return sentence.split("").reverse().join("")
+  return sentence.split('').reverse().join('')
 }
