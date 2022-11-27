@@ -5,14 +5,13 @@ interface LetterProps {
   guessed: boolean
   ruledOut: boolean
 }
-const Letter: React.FunctionComponent<LetterProps> = (props: LetterProps) => {
+export function Letter({ guessed, ruledOut, char }: LetterProps): JSX.Element {
   let className = 'letter'
-  if (props.guessed) className += ' guessed'
-  if (props.ruledOut) className += ' ruledOut'
+  if (guessed) className += ' guessed'
+  if (ruledOut) className += ' ruledOut'
   return (
     <span className={className}>
-      {props.char}
+      {char}
     </span>
   )
 }
-export default Letter

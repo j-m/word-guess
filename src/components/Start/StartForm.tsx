@@ -2,83 +2,72 @@ import React from 'react'
 import { FaGithub } from 'react-icons/fa'
 import { version } from '../../../package.json'
 
-import SentenceInput from './SentenceInput'
-import StartGameButton from './StartGameButton'
+import { SentenceInput } from './SentenceInput'
+import { StartGameButton } from './StartGameButton'
 import { sentenceToSeed, seedToSentence } from '../../util/seed'
 
 interface StartFormProps {
-  start: (seed: bigint, input: string) => void
+  onStart: (seed: bigint, input: string) => void
 }
-interface StartFormState {
-  input: string
-  seed: bigint | undefined
-  error: string | undefined
-}
-export default class StartForm extends React.PureComponent<StartFormProps, StartFormState> {
-  constructor(props: StartFormProps) {
-    super(props)
-    this.state = {
-      input: '',
-      seed: undefined,
-      error: undefined,
-    }
-  }
+export function StartForm({ onStart }: StartFormProps): JSX.Element {
+  const [input, setInput] = React.useState<string>('')
+  const [error, setError] = React.useState<string | undefined>(undefined)
+  const [seed, setSeed] = React.useState<bigint | undefined>(undefined)
 
-  submit = () => {
-    const input: string = this.state.input.toUpperCase()
-    if (!input || !input.trim()) {
-      this.setState({ error: 'Input required' })
+  const submit = React.useCallback(() => {
+    const inputUpperCased: string = input.toUpperCase()
+    if (!inputUpperCased || !inputUpperCased.trim()) {
+      setError('Input required')
       return
     }
-    if (/^[A-Za-z\s]+$/.test(input)) {
-      this.props.start(sentenceToSeed(input), input)
+    if (/^[A-Za-z\s]+$/.test(inputUpperCased)) {
+      onStart(sentenceToSeed(inputUpperCased), inputUpperCased)
       return
     }
-    if (/^\d+$/.test(input)) {
-      this.props.start(BigInt(input), seedToSentence(BigInt(input)))
+    if (/^\d+$/.test(inputUpperCased)) {
+      onStart(BigInt(inputUpperCased), seedToSentence(BigInt(inputUpperCased)))
       return
     }
-    this.setState({ error: 'Input should either be just letters and spaces or a numeric seed' })
-  }
+    setError('Input should either be just letters and spaces or a numeric seed')
+  }, [input, onStart])
 
-  showSeed = () => {
-    this.setState((state) => ({ ...state, seed: sentenceToSeed(state.input.toUpperCase()) }))
-  }
+  const showSeed = React.useCallback(() => {
+    setSeed(sentenceToSeed(input.toUpperCase()))
+  }, [input])
 
-  onWordChange = (input: string) => {
-    this.setState({ seed: undefined, input })
-  }
+  const onWordChange = React.useCallback((input: string) => {
+    setSeed(undefined)
+    setInput(input)
+  }, [])
 
-  render() {
-    return (
-      <div>
-        {this.state.seed
-          ? <span>{this.state.seed.toString()}</span>
-          : <button onClick={this.showSeed}>Show seed</button>}
+  return (
+    <div>
+      {seed
+        ? <span>{seed.toString()}</span>
+        : <button type="button" onClick={showSeed}>Show seed</button>}
 
-        <form id="start" onSubmit={(e) => e.preventDefault()}>
-          <SentenceInput
-            value={this.state.input}
-            onChange={this.onWordChange}
-          />
-          <StartGameButton
-            onClick={this.submit}
-          />
-        </form>
-        {this.state.error && <p className="error">{this.state.error}</p>}
+      <form id="start" onSubmit={(e) => e.preventDefault()}>
+        <SentenceInput
+          value={input}
+          onChange={onWordChange}
+        />
+        <StartGameButton
+          onClick={submit}
+        />
+      </form>
+      {error === undefined ? <p className="error">{error}</p> : null}
 
-        <div style={{ width: '100%', textAlign: 'center' }}>
-          <span>
-            v
-            {version}
-          </span>
-          <span style={{ margin: '0 1rem' }}>|</span>
-          <a href="https://github.com/j-m/word-guess">
-            <FaGithub style={{ verticalAlign: 'middle' }} />
-            Behind the scenes
-          </a>
-        </div>
+      <div style={{ width: '100%', textAlign: 'center' }}>
+        <span>
+          v
+          {version}
+        </span>
+        <span style={{ margin: '0 1rem' }}>|</span>
+        <a href="https://github.com/j-m/word-guess">
+          <FaGithub style={{ verticalAlign: 'middle' }} />
+          Behind the scenes
+        </a>
       </div>
-    )
-  }
+    </div>
+  )
 }

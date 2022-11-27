@@ -59,5 +59,6 @@ module.exports = {
     semi: ['error', 'never'],
     '@typescript-eslint/semi': ['error', 'never'],
     'max-len': 'off',
+    '@typescript-eslint/explicit-function-return-type': 'warn',
   },
 }
