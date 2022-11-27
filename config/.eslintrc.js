@@ -23,6 +23,7 @@ module.exports = {
     'eslint-plugin-import',
     'jest-dom',
     'only-warn',
+    'vitest',
   ],
   extends: [
     'eslint:recommended',
