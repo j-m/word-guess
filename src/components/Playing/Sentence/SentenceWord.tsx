@@ -1,6 +1,6 @@
 import React from 'react'
 
-import SentenceInput from './SentenceInput'
+import { SentenceInput } from './SentenceInput'
 
 interface SentenceWordProps {
   word: string
@@ -8,22 +8,22 @@ interface SentenceWordProps {
   showInput: boolean
   guess: (letter: string) => void
 }
-const SentenceWord: React.FunctionComponent<SentenceWordProps> = (props: SentenceWordProps)=> {
-  const letters = props.word.split("")
+export function SentenceWord(props: SentenceWordProps): JSX.Element {
+  const {
+    word, inputIndex, showInput, guess,
+  } = props
+  const letters = word.split('')
   return (
     <div className="word">
-      {Object.values(letters).map((letter, letterIndex) => 
-        props.showInput && letterIndex === props.inputIndex
-        ? <SentenceInput guess={props.guess}/>
-        : <span key={letterIndex} className='character'>
-            {letterIndex < props.inputIndex 
-              ? letter 
-              : undefined
-            }
+      {Object.values(letters).map((letter, letterIndex) => (showInput && letterIndex === inputIndex
+        ? <SentenceInput guess={guess} />
+        : (
+          <span key={letterIndex} className="character">
+            {letterIndex < inputIndex
+              ? letter
+              : undefined}
           </span>
-      )}
+        )))}
     </div>
   )
 }
-
-export default SentenceWord

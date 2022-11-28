@@ -4,12 +4,11 @@ interface LivesProps {
   count: number
   remaining: number
 }
-const Lives: React.FunctionComponent<LivesProps> = (props: LivesProps) => {
+export function Lives({ count, remaining }: LivesProps): JSX.Element {
   return (
     <span id="lives">
-    { [...Array(props.remaining)].map((e, i) => <span key={'remaining'+i}>♥</span> ) }
-    { [...Array(props.count - props.remaining)].map((e, i) => <span key={'used'+i}>♡</span> ) }
+      {[...Array(remaining)].map((e, i) => <span key={`remaining${i}`}>♥</span>)}
+      {[...Array(count - remaining)].map((e, i) => <span key={`used${i}`}>♡</span>)}
     </span>
   )
 }
-export default Lives

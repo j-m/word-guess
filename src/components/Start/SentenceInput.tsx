@@ -4,16 +4,14 @@ interface SentenceInputProps {
   value: string
   onChange: (input: string) => void
 }
-const SentenceInput: React.FunctionComponent<SentenceInputProps> = (props: SentenceInputProps)=> {
+export function SentenceInput({ value, onChange }: SentenceInputProps): JSX.Element {
   return (
-    <input 
+    <input
       type="text"
-      style={{fontSize:'3rem', fontWeight:400}}
-      value={props.value}
-      onChange={(event: React.ChangeEvent<HTMLInputElement>) =>  props.onChange(event.target.value) }
+      style={{ fontSize: '3rem', fontWeight: 400 }}
+      value={value}
+      onChange={(event: React.ChangeEvent<HTMLInputElement>) => onChange(event.target.value)}
       autoFocus
     />
   )
 }
-
-export default SentenceInput

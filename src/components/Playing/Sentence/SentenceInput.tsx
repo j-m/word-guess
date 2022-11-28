@@ -3,16 +3,15 @@ import React from 'react'
 interface SentenceInputProps {
   guess: (letter: string) => void
 }
-const SentenceInput: React.FunctionComponent<SentenceInputProps> = (props: SentenceInputProps) => {
+export function SentenceInput({ guess }: SentenceInputProps): JSX.Element {
   return (
-    <input 
+    <input
       type="text"
-      className='character'
+      className="character"
       value=""
       maxLength={1}
-      onChange={(event: React.ChangeEvent<HTMLInputElement>) =>  props.guess(event.target.value) }
+      onChange={(event: React.ChangeEvent<HTMLInputElement>) => guess(event.target.value)}
       autoFocus
     />
   )
 }
-export default SentenceInput
