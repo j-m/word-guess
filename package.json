@@ -48,6 +48,6 @@
     "eslint-plugin-vitest": "^0.0.20",
     "typescript": "~4.4",
     "vite": "^3.2.4",
-    "vitest": "^0.25.3"
+    "vitest": "^0.25.7"
   }
 }
