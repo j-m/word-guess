@@ -27,8 +27,3 @@ Take a look at our [issues](https://github.com/j-m/word-guess/issues) and [proje
 - Daily Challenge  
 - Leaderboards  
 - Compete mode  
-
-## Wiki
-
-[Changelog](./CHANGELOG.md)  
-[Live deployment](https://j-m-word-guess.herokuapp.com/)  
