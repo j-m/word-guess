@@ -21,9 +21,7 @@ module.exports = {
     '@typescript-eslint',
     'simple-import-sort',
     'eslint-plugin-import',
-    'jest-dom',
     'only-warn',
-    'vitest',
   ],
   extends: [
     'eslint:recommended',
