@@ -12,6 +12,7 @@
     "serve": "vite preview --config config/vite.config.ts",
     "start": "vite  --config config/vite.config.ts"
   },
+  "type": "module",
   "engines": {
     "node": "^20",
     "npm": "^10"
