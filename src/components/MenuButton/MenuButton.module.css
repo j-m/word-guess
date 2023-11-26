@@ -1,0 +1,16 @@
+.container {
+  display: inline-block;
+  margin:1rem;
+}
+
+.label {
+  width: 20rem;
+  height: 2rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.button {
+  width: 20rem;
+  height: 20rem;
+}

@@ -1,0 +1,44 @@
+<svg viewBox="0 0 50 50" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <text  alignment-baseline="middle">
+    💩 
+    <animate 
+      attributeType="XML" 
+      attributeName="y" 
+      values="-25;25;" 
+      dur="5s" 
+      repeatCount="indefinite"
+    />
+  </text>
+  <text  alignment-baseline="middle">
+    💩 
+    <animate 
+      attributeType="XML" 
+      attributeName="y" 
+      values="25;75;" 
+      dur="5s" 
+      repeatCount="indefinite"
+    />
+  </text>
+
+  <text x="25" alignment-baseline="middle">
+    💩 
+    <animate 
+      attributeType="XML" 
+      attributeName="y" 
+      values="25;-25;" 
+      dur="5s" 
+      repeatCount="indefinite"
+    />
+  </text>
+    <text x="25" alignment-baseline="middle">
+    💩 
+    <animate 
+      attributeType="XML" 
+      attributeName="y" 
+      values="75;25;" 
+      dur="5s" 
+      repeatCount="indefinite"
+    />
+  </text>
+
+</svg>

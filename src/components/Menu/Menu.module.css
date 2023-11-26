@@ -1,0 +1,36 @@
+.page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  position:relative;
+  width: 90rem;
+  height: 40rem;
+  border: 0.2rem solid black;
+  border-radius: 1rem;
+
+  overflow: hidden;
+}
+
+.back {
+  display: inline-block;
+  position: absolute;
+  top: 0;
+  left:0;
+  width: 10rem;
+  height: 3rem; 
+}
+
+.footer {
+  display: inline-block;
+  position: absolute;
+  bottom: 1rem;
+  right:1rem;
+}
+
+.separator {
+  margin: 0 1rem;
+}
+.github {
+  vertical-align: middle;
+}
