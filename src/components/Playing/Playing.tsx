@@ -25,25 +25,25 @@ export function Playing(props: PlayingProps): JSX.Element {
   const [status, setStatus] = React.useState<Status>('playing')
 
   const guess = React.useCallback((letter: string) => {
-    letter = letter.toUpperCase()
-    if (objective[sentence.length] === letter) {
-      if (sentence + letter === objective) {
-        setSentence((sentence) => sentence + letter)
+    let upperLetter = letter.toUpperCase()
+    if (objective[sentence.length] === upperLetter) {
+      if (sentence + upperLetter === objective) {
+        setSentence((current) => current + upperLetter)
         setGuessed([])
         setStatus('won')
       } else {
         if (objective[sentence.length + 1] === ' ') {
-          letter += ' '
+          upperLetter += ' '
         }
-        setSentence((sentence) => sentence + letter)
+        setSentence((current) => current + upperLetter)
         setGuessed([])
       }
     } else if (lives - guesses === 1) {
-      setGuesses((guesses) => guesses + 1)
+      setGuesses((current) => current + 1)
       setStatus('lost')
     } else {
-      setGuessed((guessed) => ([...guessed, letter]))
-      setGuesses((guesses) => guesses + 1)
+      setGuessed((current) => ([...current, upperLetter]))
+      setGuesses((current) => current + 1)
     }
   }, [guesses, lives, objective, sentence])
 
@@ -98,6 +98,7 @@ export function Playing(props: PlayingProps): JSX.Element {
             <button
               type="button"
               onClick={reset}
+              // eslint-disable-next-line jsx-a11y/no-autofocus
               autoFocus
             >
               Play New Game

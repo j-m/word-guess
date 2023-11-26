@@ -1,12 +1,13 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import './index.css'
-
+import { createRoot } from 'react-dom/client'
 import { Game } from './components/Game'
 
-ReactDOM.render(
+import './index.css'
+
+const container = document.getElementById('app')
+const root = createRoot(container!)
+root.render(
   <React.StrictMode>
     <Game />
   </React.StrictMode>,
-  document.getElementById('root'),
 )

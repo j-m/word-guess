@@ -7,8 +7,8 @@ interface LivesProps {
 export function Lives({ count, remaining }: LivesProps): JSX.Element {
   return (
     <span id="lives">
-      {[...Array(remaining)].map((e, i) => <span key={`remaining${i}`}>♥</span>)}
-      {[...Array(count - remaining)].map((e, i) => <span key={`used${i}`}>♡</span>)}
+      {Array(remaining).fill(0).map((e, i) => <span key={`remaining${i}`}>♥</span>)}
+      {Array(count - remaining).fill(0).map((e, i) => <span key={`used${i}`}>♡</span>)}
     </span>
   )
 }

@@ -31,7 +31,7 @@ code {
   text-decoration: line-through #ee0000;
 }
 
-#root {
+#app {
   display: flex;
   flex-direction: column;
   align-items: center; 
