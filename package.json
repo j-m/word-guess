@@ -15,8 +15,8 @@
     "test": "vitest --config config/vitest.config.ts"
   },
   "engines": {
-    "node": ">=18.0.0",
-    "npm": ">=8.0.0"
+    "node": "^20",
+    "npm": "^10"
   },
   "dependencies": {
     "react": "^18.2.0",
@@ -29,7 +29,7 @@
     "@nabla/vite-plugin-eslint": "^1.5.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
-    "@types/node": "^18.16.3",
+    "@types/node": "^20.10.0",
     "@types/react": "^18.0.35",
     "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "^5.59.1",
